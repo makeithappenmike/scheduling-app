@@ -22,12 +22,12 @@ currentDayContainer.html(currentDay.format("dddd, MMMM Do YYYY"));
 // Build rows
 var row = "";
 for (i = 9; i <= 18; i++) {
-    console.log(i);
-    row = $(`<section class="row time-block">${i}</section>`);
+    // console.log(i);
+    row = $(`<section class="row time-block">`);
     // console.log(row);
-    col1 = $(`<section class="col">${i}</section>`);
-    col2 = $(`<section class="col">${i}</section>`);
-    col3 = $(`<section class="col">${i}</section>`);
+    col1 = $(`<section class="col hour">${i}</section>`);
+    col2 = $(`<textarea class="col description">DESCRIPTION</textarea>`);
+    col3 = $(`<section class="col saveBtn">SAVE</section></section>`);
     row.append(col1);
     row.append(col2);
     row.append(col3);
