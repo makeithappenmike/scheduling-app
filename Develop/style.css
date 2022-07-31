@@ -21,19 +21,25 @@ textarea{
   border-bottom: 10px solid black;
 }
 
+/* .container {
+  vertical-align: middle;
+} */
+
 .description{
   white-space: pre-wrap;
 }
 
 .time-block{
   text-align: center;
+  vertical-align: middle;
   border-radius: 15px;
 }
 
 .row {
   white-space: pre-wrap;
   height: 80px;
-  border-top: 1px solid white;;
+  border-top: 1px solid white;
+  vertical-align: middle;
 }
 
 .hour {
