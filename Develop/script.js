@@ -14,6 +14,7 @@
 
 // Get the current day and show it at the top of the calendar
 var currentDayContainer = $("#currentDay");
+var calendarContainer = $(".container");
 var currentDay = moment();
 currentDayContainer.html(currentDay.format("dddd, MMMM Do YYYY"));
 // currentDayContainer.innerHTML = currentDay.format("dddd, MMMM Do YYYY");
@@ -22,13 +23,14 @@ currentDayContainer.html(currentDay.format("dddd, MMMM Do YYYY"));
 var row = "";
 for (i = 9; i <= 18; i++) {
     console.log(i);
-    var row = $('#row').append(`<section class="row">${i}</section>`);
-    col1 = $('#time').append(`<section class="col">${i}</section>`);
-    col2 = $('#info').append(`<section class="col">${i}</section>`);
-    col3 = $('#save').append(`<section class="col">${i}</section>`);
+    row = $(`<section class="row time-block">${i}</section>`);
+    // console.log(row);
+    col1 = $(`<section class="col">${i}</section>`);
+    col2 = $(`<section class="col">${i}</section>`);
+    col3 = $(`<section class="col">${i}</section>`);
     row.append(col1);
     row.append(col2);
     row.append(col3);
-    // ${"#container"}.append(row);
+    calendarContainer.append(row);
 };
 
