@@ -16,7 +16,7 @@
 var currentDayContainer = $("#currentDay");
 var calendarContainer = $(".container");
 var currentDay = moment();
-var currentHour = moment().format("h a");
+var currentHour = moment().format("ha");
 var past = moment().subtract(1, "hours");
 var futre = moment().add(1, "hours");
 console.log("current hour:", currentHour);
@@ -39,10 +39,18 @@ for (i = 9; i <= 18; i++) {
     row.append(col3);
     calendarContainer.append(row);
     console.log(i);
-    // console.log(convertAmPm(i));
-
-    if (convertAmPm(i) > currentHour) {
+    // Color current hour red
+    if (moment().set('hour', i).format("ha") === currentHour) {
         col1.attr("style", "background-color: red");
+    }
+    
+    // Color past gray
+    else if (moment().set('hour', i).format("ha") < currentHour) {
+        col1.attr("style", "background-color: gray");
+    
+        // Color future green
+    } else if (moment().set('hour', i).format("ha") > currentHour) {
+        col1.attr("style", "background-color: green");
     };
 };
 
