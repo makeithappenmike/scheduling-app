@@ -16,9 +16,12 @@
 var currentDayContainer = $("#currentDay");
 var calendarContainer = $(".container");
 var currentDay = moment();
-var currentHour = moment().format("h");
-console.log(currentHour);
-currentDayContainer.html(currentDay.format("dddd, MMMM Do YYYY"));
+var currentHour = moment().format("h a");
+var past = moment().subtract(1, "hours");
+var futre = moment().add(1, "hours");
+console.log("current hour:", currentHour);
+console.log("test", moment().set('hour', 9).format("ha"));
+currentDayContainer.html(currentDay.format("[Today is] dddd, MMMM Do YYYY"));
 // currentDayContainer.innerHTML = currentDay.format("dddd, MMMM Do YYYY");
 
 // Build rows
@@ -27,7 +30,7 @@ var row = "";
 // Set's hours to 9am - 6pm
 for (i = 9; i <= 18; i++) {
     row = $(`<section class="row time-block">`);
-    col1 = $(`<section class="col hour">${convertAmPm(i)}</section>`);
+    col1 = $(`<section class="col hour">${moment().set('hour', i).format("ha")}</section>`);
     col1.attr("background-color", "black");
     col2 = $(`<textarea class="col description">DESCRIPTION</textarea>`);
     col3 = $(`<section class="col saveBtn"><i class="fas fa-save"></i></section></section>`);
@@ -35,23 +38,12 @@ for (i = 9; i <= 18; i++) {
     row.append(col2);
     row.append(col3);
     calendarContainer.append(row);
+    console.log(i);
+    // console.log(convertAmPm(i));
 
     if (convertAmPm(i) > currentHour) {
         col1.attr("style", "background-color: red");
     };
 };
 
-// Convert time to AM or PM
-function convertAmPm(hour) {
-    var amOrPm = "";
-    if (hour <= 11){
-        amOrPm = "AM";
-      } else{
-        amOrPm = "PM";
-      }
-      // Get 13 to show as 1
-      hour = hour % 12;
-      hour = hour ? hour : 12;
-      return hour + " " + amOrPm;
-};
 
