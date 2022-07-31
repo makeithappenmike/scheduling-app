@@ -11,3 +11,8 @@
 // THEN the text for that event is saved in local storage
 // WHEN I refresh the page
 // THEN the saved events persist
+
+// Get the current day and show it at the top of the calendar
+var currentDayContainer = document.getElementById("currentDay");
+var currentDay = moment();
+currentDayContainer.innerHTML = currentDay.format("dddd, MMMM Do YYYY");
