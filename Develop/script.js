@@ -6,6 +6,7 @@ var currentHour = moment().format("ha");
 var past = moment().subtract(1, "hours");
 var future = moment().add(1, "hours");
 var description;
+var calendarTimeBlocks = [];
 console.log("current hour:", currentHour);
 console.log("test", moment().set('hour', 9).format("ha"));
 currentDayContainer.html(currentDay.format("[Today is] dddd, MMMM Do YYYY"));
@@ -17,11 +18,15 @@ var row = "";
 // Sets hours to 9am - 6pm
 for (i = 9; i <= 18; i++) {
 
+    // Create objects for time blocks
+    var timeBlock = {"id": i, "time": moment().set('hour', i).format("ha"), "description": ""};
+    calendarTimeBlocks.push(timeBlock);
+
     // Create rows with three columns
     row = $(`<section class="row time-block">`);
     col1 = $(`<section class="col hour">${moment().set('hour', i).format("ha")}</section>`);
     col1.attr("background-color", "black");
-    col2 = $(`<textarea id="${i}" class="col description">${description}${i}</textarea>`);
+    col2 = $(`<textarea id="${i}" class="col description">${i}</textarea>`);
     col3 = $(`<section class="col saveBtn"><i id="description${i}saveBtn" class="fas fa-save saveIcon"></i></section></section>`);
     row.append(col1);
     row.append(col2);
@@ -30,7 +35,7 @@ for (i = 9; i <= 18; i++) {
     // Add all info as a new hour block
     calendarContainer.append(row);
     description = $(`${i}`).val();
-    var entry = {"time": "", "description": ""};
+    
     console.log("description", $(`${i}`).val());
 
     // Color current hour red
@@ -47,6 +52,8 @@ for (i = 9; i <= 18; i++) {
         col2.attr("style", "background-color: green");
     };
 };
+
+console.log(calendarTimeBlocks);
 
 // Save description and time to storage
 var saveIcon = $(".saveIcon");
