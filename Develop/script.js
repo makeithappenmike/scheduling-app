@@ -17,20 +17,22 @@ var row = "";
 // Sets hours to 9am - 6pm
 for (i = 9; i <= 18; i++) {
     if (localStorage.getItem(`timeSlot${i}`) != null) {
-        JSON.parse(localStorage.getItem(`timeSlot${i}`));
-        // JSON.parse(localStorage.getItem(`description${i}`));
+        localStorage.getItem(`timeSlot${i}`);
+        localStorage.getItem(`description${i}`);
     };
     row = $(`<section class="row time-block">`);
     col1 = $(`<section class="col hour">${moment().set('hour', i).format("ha")}</section>`);
     col1.attr("background-color", "black");
-    col2 = $(`<textarea id="description${i}" class="col description">DESCRIPTION</textarea>`);
-    col3 = $(`<section id="saveBtn${i}" class="col saveBtn"><i class="fas fa-save saveIcon"></i></section></section>`);
+    col2 = $(`<textarea id="description${i}" class="col description">${description}${i}</textarea>`);
+    col3 = $(`<section class="col saveBtn"><i id="description${i}saveBtn" class="fas fa-save saveIcon"></i></section></section>`);
     row.append(col1);
     row.append(col2);
     row.append(col3);
     calendarContainer.append(row);
-    description = $("#description").val();
+    description = $(`#description${i}`).val();
     var entry = {"time": "", "description": ""};
+    console.log("description", $(`description${i}`).val());
+
     // localStorage.setItem(`timeSlot${i}`, i);
     // localStorage.setItem(`description${i}`, description);
 
@@ -52,10 +54,19 @@ for (i = 9; i <= 18; i++) {
 // Save description and time to storage
 var saveIcon = $(".saveIcon");
 saveIcon.click(function(event){
-    localStorage.setItem(`timeSlot${i}`, i);
-    console.log("target", event.target.id);
-    console.log($(`description${i}`).val());
-    localStorage.setItem(`description${i}`, description);
+    var targetId = event.target.id;
+    var iDnumber = targetId[11] + targetId[12];
+    console.log("num", iDnumber);
+    if (targetId.length > 18) {
+        var targetDescription = targetId.slice(0, -7);
+    };
+    console.log("target", targetDescription);
+    localStorage.setItem(`description${i}`, targetDescription);
+    var descToAdd = $(`#description${i}`).val();
+    // localStorage.setItem(`description${i}`, "new thing");
+    // console.log("target", event.target.id);
+    // console.log("description", $(`description${i}`).val());
+    // localStorage.setItem(`description${i}`, description);
     console.log("click");
   });
 
