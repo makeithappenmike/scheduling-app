@@ -1,24 +1,11 @@
-// GIVEN I am using a daily planner to create a schedule
-// WHEN I open the planner
-// THEN the current day is displayed at the top of the calendar - done
-// WHEN I scroll down
-// THEN I am presented with time blocks for standard business hours - done
-// WHEN I view the time blocks for that day
-// THEN each time block is color-coded to indicate whether it is in the past, present, or future
-// WHEN I click into a time block
-// THEN I can enter an event
-// WHEN I click the save button for that time block
-// THEN the text for that event is saved in local storage
-// WHEN I refresh the page
-// THEN the saved events persist
-
 // Get the current day and show it at the top of the calendar
 var currentDayContainer = $("#currentDay");
 var calendarContainer = $(".container");
 var currentDay = moment();
 var currentHour = moment().format("ha");
 var past = moment().subtract(1, "hours");
-var futre = moment().add(1, "hours");
+var future = moment().add(1, "hours");
+var description;
 console.log("current hour:", currentHour);
 console.log("test", moment().set('hour', 9).format("ha"));
 currentDayContainer.html(currentDay.format("[Today is] dddd, MMMM Do YYYY"));
@@ -27,31 +14,49 @@ currentDayContainer.html(currentDay.format("[Today is] dddd, MMMM Do YYYY"));
 // Build rows
 var row = "";
 
-// Set's hours to 9am - 6pm
+// Sets hours to 9am - 6pm
 for (i = 9; i <= 18; i++) {
+    if (localStorage.getItem(`timeSlot${i}`) != null) {
+        JSON.parse(localStorage.getItem(`timeSlot${i}`));
+        // JSON.parse(localStorage.getItem(`description${i}`));
+    };
     row = $(`<section class="row time-block">`);
     col1 = $(`<section class="col hour">${moment().set('hour', i).format("ha")}</section>`);
     col1.attr("background-color", "black");
-    col2 = $(`<textarea class="col description">DESCRIPTION</textarea>`);
-    col3 = $(`<section class="col saveBtn"><i class="fas fa-save"></i></section></section>`);
+    col2 = $(`<textarea id="description${i}" class="col description">DESCRIPTION</textarea>`);
+    col3 = $(`<section id="saveBtn${i}" class="col saveBtn"><i class="fas fa-save saveIcon"></i></section></section>`);
     row.append(col1);
     row.append(col2);
     row.append(col3);
     calendarContainer.append(row);
-    console.log(i);
+    description = $("#description").val();
+    var entry = {"time": "", "description": ""};
+    // localStorage.setItem(`timeSlot${i}`, i);
+    // localStorage.setItem(`description${i}`, description);
+
     // Color current hour red
     if (moment().set('hour', i).format("ha") === currentHour) {
-        col1.attr("style", "background-color: red");
+        col2.attr("style", "background-color: red");
     }
     
     // Color past gray
     else if (moment().set('hour', i).format("ha") < currentHour) {
-        col1.attr("style", "background-color: gray");
+        col2.attr("style", "background-color: gray");
     
         // Color future green
     } else if (moment().set('hour', i).format("ha") > currentHour) {
-        col1.attr("style", "background-color: green");
+        col2.attr("style", "background-color: green");
     };
 };
+
+// Save description and time to storage
+var saveIcon = $(".saveIcon");
+saveIcon.click(function(event){
+    localStorage.setItem(`timeSlot${i}`, i);
+    console.log("target", event.target.id);
+    console.log($(`description${i}`).val());
+    localStorage.setItem(`description${i}`, description);
+    console.log("click");
+  });
 
 
