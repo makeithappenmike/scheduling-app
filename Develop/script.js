@@ -6,6 +6,8 @@ var currentHour = moment().format("ha");
 var past = moment().subtract(1, "hours");
 var future = moment().add(1, "hours");
 var description;
+var targetId;
+var targetDescription;
 // var calendarTimeBlocks = [];
 console.log("current hour:", currentHour);
 console.log("test", moment().set('hour', 9).format("ha"));
@@ -18,8 +20,10 @@ var row = "";
 // Sets hours to 9am - 6pm
 for (i = 9; i <= 18; i++) {
 
-    // Set local Storage
-    // localStorage.setItem("timeBlocks", JSON.stringify(calendarTimeBlocks));
+    // Check for localStorage
+    if (localStorage.getItem(`description${i}` != null)) {
+        
+    };
 
     // Create objects for time blocks
     var timeBlock = {"id": i, "time": moment().set('hour', i).format("ha"), "description": "desc"};
@@ -56,21 +60,16 @@ for (i = 9; i <= 18; i++) {
     };
 };
 
-// console.log(calendarTimeBlocks);
-
 // Save description and time to storage
 var saveIcon = $(".saveIcon");
 
 saveIcon.click(function(event){
-
-    var targetId = event.target.id.match(/\d+/).toString();
-    var targetDescription = "#description" + targetId;
-    localStorage.setItem(targetId, description);
+    targetId = event.target.id.match(/\d+/).toString();
+    targetDescription = "#description" + targetId;
+    localStorage.setItem(targetDescription, $(targetDescription).val());
     console.log("target ID:", targetId);
     console.log("target Desc:", targetDescription);
     console.log("prev", $(targetDescription).val());
-    
-    // console.log("click");
   });
 
 
