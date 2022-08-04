@@ -2,7 +2,7 @@
 var currentDayContainer = $("#currentDay");
 var calendarContainer = $(".container");
 var currentDay = moment();
-var currentHour = moment().format("ha");
+var currentHour = moment().format("hh");
 var past = moment().subtract(1, "hours");
 var future = moment().add(1, "hours");
 var description;
@@ -46,21 +46,18 @@ for (i = 9; i <= 22; i++) {
     
     description = $(`${i}`).val();
 
-    console.log("moment", moment().set('hour', i).format("ha"));
-    console.log("current", currentHour);
-
     // Color current hour red
-    if (moment().set('hour', i).format("ha") === currentHour) {
-        col2.attr("style", "background-color: red");
+    if (moment().set('hour', i).format("hh") === currentHour) {
+        col2.addClass("present");
     }
     
     // Color past gray
-    else if (moment().set('hour', i).format("ha") < currentHour) {
-        col2.attr("style", "background-color: gray");
+    else if (moment().set('hour', i).format("hh") < currentHour) {
+        col2.addClass("past");
     
     // Color future green
-    } else if (moment().set('hour', i).format("ha") > currentHour) {
-        col2.attr("style", "background-color: green");
+    } else if (moment().set('hour', i).format("hh") > currentHour) {
+        col2.addClass("future");
     };
 };
 
