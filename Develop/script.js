@@ -55,30 +55,14 @@ for (i = 9; i <= 18; i++) {
     // Add all info as a new hour block
     calendarContainer.append(row);
     
-    // Check for localStorage
+    // Check for localStorage and set to DOM
     $(".description").each(function() {
         var idToGet = "#" + $(this)[0].id;
-        // var descToGet = $(this)[0].id;
-        console.log("id", idToGet);
-        // console.log("desc12", localStorage.getItem("#description12"));
-        var existingDescription = $(this).text();
         var localStorageStuff = localStorage.getItem(idToGet);
-        console.log("local", localStorageStuff);
-        // console.log("desc", existingDescription);
-        // console.log("this", $(this));
-        console.log("siblings", $(this).siblings(idToGet).val());
-
-        $(this).siblings(idToGet).val();
-        console.log(localStorageStuff, "exists in local storage");
-        // if(description !== null) {
-        //     $(this).siblings(".description").val(description);
-        //     console.log(description, "exists in local storage");
-        // }
+        $(idToGet).val(localStorageStuff);
     });
     
     description = $(`${i}`).val();
-    
-    console.log("description", $(`${i}`).val());
 
     // Color current hour red
     if (moment().set('hour', i).format("ha") === currentHour) {
