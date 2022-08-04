@@ -17,26 +17,8 @@ currentDayContainer.html(currentDay.format("[Today is] dddd, MMMM Do YYYY"));
 // Build rows
 var row = "";
 
-
-// var nineAm = localStorage.getItem("#description9");
-// var testAm = localStorage.getItem("#description10");
-// var elevenAm = localStorage.getItem("#description11");
-// var twelvePm = localStorage.getItem("#description12");
-// var onePm = localStorage.getItem("#description13");
-// var twoPm = localStorage.getItem("#description14");
-// var threePm = localStorage.getItem("#description15");
-// var fourPm = localStorage.getItem("#description16");
-// var fivePm = localStorage.getItem("#description17");
-// var sixPm = localStorage.getItem("#description18");
-
-// if (nineAm != null) {
-//     console.log("local:", nineAm);
-// } else if (testAm != null) {
-//     console.log("local:", testAm);
-// };;
-
 // Sets hours to 9am - 6pm
-for (i = 9; i <= 18; i++) {
+for (i = 9; i <= 22; i++) {
 
     // Create objects for time blocks
     var timeBlock = {"id": i, "time": moment().set('hour', i).format("ha"), "description": "desc"};
@@ -63,6 +45,9 @@ for (i = 9; i <= 18; i++) {
     });
     
     description = $(`${i}`).val();
+
+    console.log("moment", moment().set('hour', i).format("ha"));
+    console.log("current", currentHour);
 
     // Color current hour red
     if (moment().set('hour', i).format("ha") === currentHour) {
