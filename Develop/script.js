@@ -17,12 +17,7 @@ currentDayContainer.html(currentDay.format("[Today is] dddd, MMMM Do YYYY"));
 // Build rows
 var row = "";
 
-// Check for localStorage
-$(".hour").each(function () {
-    var existingTime = $(this).val();
-    var existingDescription = localStorage.getItem(existingTime);
-    console.log(existingDescription);
-});
+
 // var nineAm = localStorage.getItem("#description9");
 // var testAm = localStorage.getItem("#description10");
 // var elevenAm = localStorage.getItem("#description11");
@@ -34,11 +29,11 @@ $(".hour").each(function () {
 // var fivePm = localStorage.getItem("#description17");
 // var sixPm = localStorage.getItem("#description18");
 
-if (nineAm != null) {
-    console.log("local:", nineAm);
-} else if (testAm != null) {
-    console.log("local:", testAm);
-};;
+// if (nineAm != null) {
+//     console.log("local:", nineAm);
+// } else if (testAm != null) {
+//     console.log("local:", testAm);
+// };;
 
 // Sets hours to 9am - 6pm
 for (i = 9; i <= 18; i++) {
@@ -59,6 +54,28 @@ for (i = 9; i <= 18; i++) {
 
     // Add all info as a new hour block
     calendarContainer.append(row);
+    
+    // Check for localStorage
+    $(".description").each(function() {
+        var idToGet = "#" + $(this)[0].id;
+        // var descToGet = $(this)[0].id;
+        console.log("id", idToGet);
+        // console.log("desc12", localStorage.getItem("#description12"));
+        var existingDescription = $(this).text();
+        var localStorageStuff = localStorage.getItem(idToGet);
+        console.log("local", localStorageStuff);
+        // console.log("desc", existingDescription);
+        // console.log("this", $(this));
+        console.log("siblings", $(this).siblings(idToGet).val());
+
+        $(this).siblings(idToGet).val();
+        console.log(localStorageStuff, "exists in local storage");
+        // if(description !== null) {
+        //     $(this).siblings(".description").val(description);
+        //     console.log(description, "exists in local storage");
+        // }
+    });
+    
     description = $(`${i}`).val();
     
     console.log("description", $(`${i}`).val());
