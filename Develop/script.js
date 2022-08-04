@@ -8,11 +8,8 @@ var future = moment().add(1, "hours");
 var description;
 var targetId;
 var targetDescription;
-// var calendarTimeBlocks = [];
-// console.log("current hour:", currentHour);
-// console.log("test", moment().set('hour', 9).format("ha"));
+
 currentDayContainer.html(currentDay.format("[Today is] dddd, MMMM Do YYYY"));
-// currentDayContainer.innerHTML = currentDay.format("dddd, MMMM Do YYYY");
 
 // Build rows
 var row = "";
@@ -22,7 +19,6 @@ for (i = 9; i <= 22; i++) {
 
     // Create objects for time blocks
     var timeBlock = {"id": i, "time": moment().set('hour', i).format("ha"), "description": "desc"};
-    // calendarTimeBlocks.push(timeBlock);
 
     // Create rows with three columns
     row = $(`<section class="row time-block">`);
@@ -68,9 +64,6 @@ saveIcon.click(function(event){
     targetId = event.target.id.match(/\d+/).toString();
     targetDescription = "#description" + targetId;
     localStorage.setItem(targetDescription, $(targetDescription).val());
-    // console.log("target ID:", targetId);
-    // console.log("target Desc:", targetDescription);
-    // console.log("prev", $(targetDescription).val());
   });
 
 
