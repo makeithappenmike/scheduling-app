@@ -2,7 +2,7 @@
 var currentDayContainer = $("#currentDay");
 var calendarContainer = $(".container");
 var currentDay = moment();
-var currentHour = moment().format("hh");
+var currentHour = moment().format("HH");
 var past = moment().subtract(1, "hours");
 var future = moment().add(1, "hours");
 var description;
@@ -18,7 +18,7 @@ var row = "";
 for (i = 9; i <= 22; i++) {
 
     // Create objects for time blocks
-    var timeBlock = {"id": i, "time": moment().set('hour', i).format("ha"), "description": "desc"};
+    var timeBlock = {"id": i, "time": moment().set('hour', i).format("HH"), "description": "desc"};
 
     // Create rows with three columns
     row = $(`<section class="row time-block">`);
@@ -29,6 +29,11 @@ for (i = 9; i <= 22; i++) {
     row.append(col1);
     row.append(col2);
     row.append(col3);
+
+    console.log("moment", moment().set('hour', i).format("HH"));
+    console.log("current", currentHour);
+    console.log("math", moment().set('hour', i).format("HH") - currentHour);
+    // console.log(currentHour > "moment", moment().set('hour', i).format("hh"));
 
     // Add all info as a new hour block
     calendarContainer.append(row);
@@ -43,16 +48,16 @@ for (i = 9; i <= 22; i++) {
     description = $(`${i}`).val();
 
     // Color current hour red
-    if (moment().set('hour', i).format("hh") === currentHour) {
+    if (moment().set('hour', i).format("HH") === currentHour) {
         col2.addClass("present");
     }
     
     // Color past gray
-    else if (moment().set('hour', i).format("hh") < currentHour) {
+    else if (moment().set('hour', i).format("HH") < currentHour) {
         col2.addClass("past");
     
     // Color future green
-    } else if (moment().set('hour', i).format("hh") > currentHour) {
+    } else if (moment().set('hour', i).format("HH") > currentHour) {
         col2.addClass("future");
     };
 };
