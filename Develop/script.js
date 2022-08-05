@@ -8,14 +8,13 @@ var future = moment().add(1, "hours");
 var description;
 var targetId;
 var targetDescription;
-
 currentDayContainer.html(currentDay.format("[Today is] dddd, MMMM Do YYYY"));
 
 // Build rows
 var row = "";
 
 // Sets hours to 9am - 6pm
-for (i = 9; i <= 22; i++) {
+for (i = 9; i <= 18; i++) {
 
     // Create objects for time blocks
     var timeBlock = {"id": i, "time": moment().set('hour', i).format("HH"), "description": "desc"};
@@ -33,11 +32,11 @@ for (i = 9; i <= 22; i++) {
     // Add all info as a new hour block
     calendarContainer.append(row);
     
-    // Check for localStorage and set to DOM
+    // Loop through and check localStorage for data to to DOM
     $(".description").each(function() {
         var idToGet = "#" + $(this)[0].id;
-        var localStorageStuff = localStorage.getItem(idToGet);
-        $(idToGet).val(localStorageStuff);
+        var existingLocalStorage = localStorage.getItem(idToGet);
+        $(idToGet).val(existingLocalStorage);
     });
     
     description = $(`${i}`).val();
