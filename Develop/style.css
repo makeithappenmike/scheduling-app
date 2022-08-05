@@ -21,9 +21,9 @@ textarea{
   border-bottom: 10px solid black;
 }
 
-/* .container {
-  vertical-align: middle;
-} */
+.col {
+  padding-top: 30px;
+}
 
 .description{
   white-space: pre-wrap;

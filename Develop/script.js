@@ -30,11 +30,6 @@ for (i = 9; i <= 22; i++) {
     row.append(col2);
     row.append(col3);
 
-    console.log("moment", moment().set('hour', i).format("HH"));
-    console.log("current", currentHour);
-    console.log("math", moment().set('hour', i).format("HH") - currentHour);
-    // console.log(currentHour > "moment", moment().set('hour', i).format("hh"));
-
     // Add all info as a new hour block
     calendarContainer.append(row);
     
