@@ -1,4 +1,4 @@
-# Scheuduling App
+# Scheduling App
 Here's what the code does:
 
 Index.html houses the main structure of the schedule
